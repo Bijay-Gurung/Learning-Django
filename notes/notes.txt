@@ -1,0 +1,42 @@
+To check the version of djanog we can use: 
+$ python -m django --version
+
+To auto-generate some code that establishes a Django project we can use:
+$ django-admin startprojcet mysite(directory name)
+
+To run the development server we can use:
+$ python manage.py runserver
+
+By default the development server run on the internal IP at port 8000. to change the server's port we can use:
+$ python manage.py runserver 8080
+
+To change the seruver's IP. we can use:
+$ python manage.py runserver 0.0.0.0:8000
+
+It is used when we want to show off our work on other computers on the network.
+
+To create the app in the same directory as manage.py file we can use:
+python manage.py startapp polls
+
+It will create a directory polls.
+
+-----------------------------------------------------------------
+Inside urls.py which is in mysite directory
+from django.contrib import admin
+from django.urls import path
+
+urlpatterns = [
+    path('polls/', include("polls.urls")),
+    path('polls/', admin.site.urls),
+]
+
+include() function: It allows referencing other URLconfs.
+It make easy to plug-and-play URLs. It chops off whatever part of the URL matched up to that point and sends the remaining string to the included URLconf for further processing.
+---------------------------------------------------------------
+Inside views.py which is in polls directory
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("", views.index, name="index"),
+]
